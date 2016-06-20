@@ -70,7 +70,7 @@ class GlobalShieldCommand extends Command{
                     break;
                 default:
                     $sender->sendMessage("/globalshield <sub-command> [parameters]");
-                    return false;
+                    break;
             }
         }
         else{
