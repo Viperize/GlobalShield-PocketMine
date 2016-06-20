@@ -25,7 +25,7 @@ class GlobalShieldCommand extends Command{
         ];
         $sender->sendMessage("GlobalShield commands:");
         foreach($commands as $name => $description){
-            $sender->sendMessage("/globalshield ".$name.": ".$description);
+            $sender->sendMessage("/globalshield $name: $description");
         }
     }
     /**
@@ -43,31 +43,31 @@ class GlobalShieldCommand extends Command{
             switch(strtolower($args[0])){
                 case "help":
                     $this->sendCommandHelp($sender);
-                    return true;
+                    break;
                 case "l":
                 case "load":
                     if(isset($args[1])){
                         if($level = $sender->getServer()->getLevelByName($args[1])){
                             $storage->addShield($level);
-                            $sender->sendMessage(TextFormat::GREEN."Loaded shield for level \"".$args[1]."\".");
+                            $sender->sendMessage(TextFormat::GREEN."Loaded shield for level $args[1].");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."That shield couldn't be found.");
                         }
                     }
-                    return true;
+                    break;
                 case "u":
                 case "unload":
                     if(isset($args[1])){
                         if($level = $sender->getServer()->getLevelByName($args[1])){
                             $storage->removeShield($level);
-                            $sender->sendMessage(TextFormat::GREEN."Unloaded shield for level \"".$args[1]."\".");
+                            $sender->sendMessage(TextFormat::GREEN."Unloaded shield for level $args[1].");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."That shield couldn't be found.");
                         }
                     }
-                    return true;
+                    break;
                 default:
                     $sender->sendMessage("/globalshield <sub-command> [parameters]");
                     return false;
@@ -77,5 +77,6 @@ class GlobalShieldCommand extends Command{
             $this->sendCommandHelp($sender);
             return false;
         }
+        return true;
     }
 }
